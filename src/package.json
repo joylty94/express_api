@@ -24,6 +24,9 @@
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
-    "@babel/preset-env": "^7.7.4"
+    "@babel/preset-env": "^7.7.4",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
+    "regenerator-runtime": "^0.13.3"
   }
 }
