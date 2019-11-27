@@ -3,6 +3,7 @@
 import {
     uuid
 } from '../utils/uuid'
+import bcrypt from 'bcrypt'
 
 module.exports = function(sequelize, DataTypes){
     const User = sequelize.define('User', {
@@ -37,7 +38,13 @@ module.exports = function(sequelize, DataTypes){
     }
 
     // hooks
-
+    User.beforeSave(async (user, options) => {
+        if (user.changed('password')) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(user.password, salt);
+        }
+    });
+    
     User.prototype.toWeb = function () {
         const values = Object.assign({}, this)
 
