@@ -38,5 +38,14 @@ module.exports = function(sequelize, DataTypes){
 
     // hooks
 
+    User.prototype.toWeb = function () {
+        const values = Object.assign({}, this)
+
+        delete values.id
+        delete values.password
+
+        return values
+    }
+
     return User
 }

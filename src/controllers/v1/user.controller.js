@@ -15,7 +15,7 @@ const get = async (req, res, next) => {
 
             return res
                 .status(httpStatus.OK)
-                .json(user)
+                .json(user.toWeb())
         } else {
             const users = await userRepo.all()
 
