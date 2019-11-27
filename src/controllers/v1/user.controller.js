@@ -7,6 +7,7 @@ import userRepo from '../../repositories/user.repository'
 const get = async (req, res, next) => {
     try {
         if (req.params.uuid) {
+        
             const user = await userRepo.find(req.params.uuid)
 
             if (!user) {
