@@ -1,11 +1,11 @@
 'use strict'
 
+import bcrypt from 'bcrypt'
 import {
     uuid
 } from '../utils/uuid'
-import bcrypt from 'bcrypt'
 
-module.exports = function(sequelize, DataTypes){
+module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         uuid: {
             allowNull: false,
@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes){
             type: 'BINARY(16)',
             defaultValue: () => Buffer(uuid(), 'hex'),
             get: function () {
-                return Buffer.from(this.getDataValue('uuid')).toString('hex')
+                return Buffer.from(this.getDataValue('uuid'))
+                    .toString('hex')
             }
         },
         email: {
@@ -44,9 +45,10 @@ module.exports = function(sequelize, DataTypes){
             user.password = await bcrypt.hash(user.password, salt);
         }
     });
-    
+
+    // print
     User.prototype.toWeb = function () {
-        const values = Object.assign({}, this)
+        const values = Object.assign({}, this.get())
 
         delete values.id
         delete values.password
