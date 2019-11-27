@@ -1,6 +1,11 @@
+import { models } from '../../models'
+
 const get = async (req, res, next) => {
     try {
-        return res.json({ message: 'users get' })
+        const users = await models.User.findAll();
+
+        return res.json(users)
+
     } catch (e) {
         next(e)
     }
